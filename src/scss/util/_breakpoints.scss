@@ -1,0 +1,30 @@
+@use 'functions' as f;
+
+//em value = size/default font size (16px)
+
+$breakpoints-up: (
+    "small": f.em(768),
+    "medium": f.em(992),
+    "large": f.em(1200),
+    "xlarge": f.em(1530)
+);
+
+$breakpoints-down: (
+    "xsmall": f.em(767.98),
+    "small": f.em(991.98),
+    "medium": f.em(1199.98),
+    "large": f.em(1529.98)
+);
+
+
+@mixin breakpoint($size) {
+    @media (min-width: map-get($breakpoints-up, $size)){
+        @content;
+    }
+}
+
+@mixin breakpoint-down($size) {
+    @media (max-width: map-get($breakpoints-down, $size)){
+        @content;
+    }
+}

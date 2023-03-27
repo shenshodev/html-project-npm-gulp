@@ -1,0 +1,49 @@
+@use '../util' as u;
+
+//3
+%widget{
+    padding: u.rem(16);
+}
+
+.grid{
+    &__widget{
+        // $widget: &; //2
+        &--magenta{
+            @extend %widget; //3
+            background-color: blueviolet;
+        }
+        &--green{
+            @extend %widget; //3
+            // @extend .grid__widget; //1
+            // @extend #{$widget}; //2
+            background-color: green;
+        }
+    }
+}
+
+body{
+    color: #fff;
+    background-color: red;
+    h1{
+        font-size: u.em(18);
+    }
+}
+
+@include u.breakpoint-down(xsmall){
+    body{
+        background-color: green;
+        h1{
+            font-size: u.em(30);
+        }
+    }
+}
+
+@include u.breakpoint(large){
+    body{
+        color: #000;
+        background-color: pink;
+        h1{
+            font-size: u.em(30);
+        }
+    }
+}

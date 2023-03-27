@@ -1,0 +1,30 @@
+@use 'sass:math';
+
+//Throw an error if the parameter ha a unit
+@function rem($pixel) {
+    //if $pixel has a unit, throw an error
+    @if math.is-unitless($pixel) {
+        @return math.div($pixel, 16)+rem;
+    }
+
+    //Otherwise (else) divide $pixel by 16 to return rems
+    @else {
+        @error 'Don\'t use units when using the rem() function; only numbers.';
+    }
+}
+
+@function em($pixel) {
+    //if $pixel has a unit, throw an error
+    @if math.is-unitless($pixel) {
+        @return math.div($pixel, 16)+em;
+    }
+
+    //Otherwise (else) divide $pixel by 16 to return rems
+    @else {
+        @error 'Don\'t use units when using the em() function; only numbers.';
+    }
+}
+
+@function responsive-px($min-px, $max-px, $min-vw, $max-vw) {
+    @return calc(#{$min-px}px + (#{$max-px} - #{$min-px}) * ((100vw - #{$min-vw}px) / (#{$max-vw} - #{$min-vw})));
+}
